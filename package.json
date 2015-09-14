@@ -12,6 +12,7 @@
       "email": "spruce@space-ships.de"
     }
   ],
+  "license": "MIT",
   "bugs": {
     "mail": "schaermu@gmail.com",
     "url": "http://github.com/fluent-ffmpeg/node-fluent-ffmpeg/issues"
@@ -26,7 +27,8 @@
     "jsdoc": "latest"
   },
   "dependencies": {
-    "async": ">=0.2.9"
+    "async": ">=0.2.9",
+    "which": "^1.1.1"
   },
   "engines": {
     "node": ">=0.8.0"
