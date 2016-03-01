@@ -1,6 +1,6 @@
 {
   "name": "fluent-ffmpeg",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A fluent API to FFMPEG (http://www.ffmpeg.org)",
   "keywords": [
     "ffmpeg"
@@ -21,13 +21,11 @@
   "devDependencies": {
     "mocha": "latest",
     "should": "latest",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-shell": "~0.3.0",
-    "grunt": "~0.4.1",
     "jsdoc": "latest"
   },
   "dependencies": {
-    "async": ">=0.2.9"
+    "async": ">=0.2.9",
+    "which": "^1.1.1"
   },
   "engines": {
     "node": ">=0.8.0"
