@@ -37,7 +37,7 @@ Most features should work when using avconv and avprobe instead of ffmpeg and ff
 
 **Windows users**: most probably ffmpeg and ffprobe will _not_ be in your `%PATH`, so you _must_ set `%FFMPEG_PATH` and `%FFPROBE_PATH`.
 
-**Debian/Ubuntu users**: the official repositories have the ffmpeg/ffprobe executable in the `libav-tools` package, and they are actually rebranded avconv/avprobe executables (avconv is a fork of ffmpeg).  They should be mostly compatible, but should you encounter any issue, you may want to use the real ffmpeg instead.  You can either compile it from source or find a pre-built .deb package at https://ffmpeg.org/download.html (For Ubuntu, the `ppa:jon-severinsson/ffmpeg` PPA provides recent builds).
+**Debian/Ubuntu users**: the official repositories have the ffmpeg/ffprobe executable in the `libav-tools` package, and they are actually rebranded avconv/avprobe executables (avconv is a fork of ffmpeg).  They should be mostly compatible, but should you encounter any issue, you may want to use the real ffmpeg instead.  You can either compile it from source or find a pre-built .deb package at https://ffmpeg.org/download.html (For Ubuntu, the `ppa:mc3man/trusty-media` PPA provides recent builds).
 
 #### flvtool2 or flvmeta
 
@@ -847,6 +847,8 @@ ffmpeg('/path/to/file.avi')
 #### 'error': transcoding error
 
 The `error` event is emitted when an error occurs when running ffmpeg or when preparing its execution.  It is emitted with an error object as an argument.  If the error happened during ffmpeg execution, listeners will also receive two additional arguments containing ffmpegs stdout and stderr.
+
+If streams are used for input or output, any errors emitted from these streams will be passed through to this event, attached to the `error` as `inputStreamError` and `outputStreamError` for input and output streams respectively.
 
 **Warning**: you should _always_ set a handler for the `error` event, as node's default behaviour when an `error` event without any listeners is emitted is to output the error to the console and _terminate the program_.
 
