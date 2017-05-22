@@ -24,7 +24,7 @@
     "jsdoc": "latest"
   },
   "dependencies": {
-    "async": ">=0.2.9",
+    "async": ">=2.4.1",
     "which": "^1.1.1"
   },
   "engines": {
