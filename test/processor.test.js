@@ -280,6 +280,18 @@ describe('Processor', function() {
           .saveToFile(testFile);
     });
 
+    it('should not keep node process running on completion', function(done) {
+      var script = `
+        var ffmpeg = require('.');
+        ffmpeg('${this.testfilebig}', { timeout: 60 })
+          .addOption('-t', 1)
+          .addOption('-f', 'null')
+          .saveToFile('/dev/null');
+      `;
+
+      exec(`node -e "${script}"`, { timeout: 1000 }, done);
+    });
+
     it('should kill the process with .kill', function(done) {
       var testFile = path.join(__dirname, 'assets', 'testProcessKill.avi');
       this.files.push(testFile);
@@ -770,7 +782,7 @@ describe('Processor', function() {
         })
         .saveToFile(testFile);
     });
-    
+
     it('should pass input stream errors through to error handler', function(done) {
       var testFile = path.join(__dirname, 'assets', 'testConvertFromStream.avi')
 
@@ -780,12 +792,12 @@ describe('Processor', function() {
   		    process.nextTick(() => this.emit('error', readError))
 		  }
       })
-      
+
       const command = this.getCommand({ source: instream, logger: testhelper.logger })
 
       let startCalled = false
       const self = this
-      
+
       command
           .usingPreset('divx')
           .on('start', function() {
@@ -953,21 +965,21 @@ describe('Processor', function() {
         new FfmpegCommand().writeToStream({end: true});
       }).should.throw(/PassThrough stream is not supported on node v0.8/);
     });
-    
+
     it('should pass output stream errors through to error handler', function(done) {
-		
+
 		const writeError = new Error('Write Error')
       const outstream = new (require('stream').Writable)({
         write(chunk, encoding, callback) {
           callback(writeError)
 		  }
       })
-      
+
       const command = this.getCommand({ source: this.testfile, logger: testhelper.logger })
 
       let startCalled = false
       const self = this
-      
+
       command
           .usingPreset('divx')
           .on('start', function() {
@@ -1076,7 +1088,7 @@ describe('Processor', function() {
     });
   });
 
-  describe('Remote I/O', function() {
+  describe.skip('Remote I/O', function() {
     this.timeout(60000);
 
     var ffserver;
